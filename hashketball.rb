@@ -1,4 +1,6 @@
 # Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -127,3 +129,114 @@ def game_hash
 end
 
 # Write code here
+
+
+def num_points_scored(player)
+  game_hash.each do |team, team_data|
+    team_data.each do |team_stats, nested_data|
+      if team_stats == :players
+        nested_data.each do |athlete|
+        if athlete[:player_name] == player
+          return athlete[:points]
+        end
+        end
+      end
+    end
+  end
+end
+
+
+def shoe_size(player)
+   game_hash.each do |team, team_data|
+      team_data.each do |team_stats, nested_data|
+        if team_stats == :players
+          nested_data.each do |athlete|
+          if athlete[:player_name] == player
+            return athlete[:shoe]
+          end
+          end
+        end
+      end
+    end
+end
+
+
+def team_colors(team_name)
+  game_hash.each do |team, team_data|
+    if game_hash[:home][:team_name] == team_name
+      return game_hash[:home][:colors]
+    else
+      return game_hash[:away][:colors]
+    end
+  end
+end
+
+
+def team_names
+  result = []
+  game_hash.each do |team, stats|
+    result.push(stats[:team_name])
+  end
+  result
+end
+
+
+def player_numbers(rival_teams)
+  result = []
+  game_hash.each do |team, team_data|
+    if team_data[:team_name] == rival_teams
+      team_data[:players].each do |player|
+        result.push(player[:number])
+      end
+    end
+  end
+  return result
+end
+
+
+def player_stats(player_name)
+  game_hash.each do |team, team_data|
+    team_data[:players].each do |player|
+      if player[:player_name] == player_name
+        return player
+      end
+    end
+  end
+end
+
+
+def big_shoe_rebounds
+  #find largest shoe size in game_hash and save it to player_with_biggest_shoe
+  player_with_biggest_shoe = 0
+  game_hash.each do |team, team_data|
+    team_data[:players].each do |player|
+    if player[:shoe] > player_with_biggest_shoe
+      player_with_biggest_shoe = player[:shoe]
+      end
+    end
+  end
+  
+  # declare nil result object. Then, update result with the player hash that matches the biggest shoe size
+  result = nil 
+  game_hash.each do |team1, team_data1|
+    team_data1[:players].each do |player1|
+      if player1[:shoe] == player_with_biggest_shoe
+        result = player1
+      end
+   end
+ end
+ # not that the result object contains Mason Plumlee's hash, return the value associated with :rebounds key
+ return result[:rebounds]
+end
+
+
+
+
+
+
+
+
+
+
+
+
