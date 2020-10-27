@@ -1,4 +1,6 @@
 # Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -126,4 +128,96 @@ def game_hash
   }
 end
 
-# Write code here
+
+# method to locate all players within game_hash
+def get_all_players
+  all_players = game_hash.values.collect do |team|
+    team[:players]
+  end
+  all_players.flatten
+end
+# binding.pry
+
+# helper method to find numbers of charlotte hornets players
+def charlotte_numbers
+  game_hash[:away][:players].collect do |hash|
+    hash[:number]
+  end
+end
+# binding.pry
+
+# helper method to find numbers of brooklyn nets players
+def brooklyn_numbers
+  game_hash[:home][:players].collect do |hash|
+    hash[:number]
+  end
+end
+# binding.pry
+
+def num_points_scored(player_name)
+  get_all_players.each do |player|
+    if player[:player_name] == player_name
+      return player[:points]
+    end
+  end
+end
+
+def shoe_size(player_name)
+  get_all_players.each do |player|
+    if player[:player_name] == player_name
+      return player[:shoe]
+    end
+  end
+end
+
+def team_colors(team_name)
+  game_hash.each do |team, data|
+    if data[:team_name] == team_name
+      return data[:colors]
+    end
+  end
+end
+
+def team_names
+  game_hash.collect do |team, data|
+    data[:team_name]
+  end
+end
+
+def player_numbers(team_name)
+  if team_name == "Brooklyn Nets"
+    brooklyn_numbers
+  elsif team_name == "Charlotte Hornets"
+    charlotte_numbers
+  end
+end
+# binding.pry
+
+def player_stats(player)
+  player_statistics = {}
+  game_hash.each do |team, team_details|
+    team_details[:players].collect do |stats|
+      if stats[:player_name] == player
+        player_statistics = stats
+      end
+    end
+  end
+  player_statistics
+end
+# binding.pry
+
+
+def big_shoe_rebounds
+  big_shoes_guy = 0
+  rebounds = 0
+    game_hash.each do |team, team_details|
+      team_details[:players].each do |stats|
+        if stats[:shoe] > big_shoes_guy
+          big_shoes_guy = stats[:shoe]
+          rebounds = stats[:rebounds]
+        end
+      end
+    end
+    rebounds
+end
+# binding.pry
