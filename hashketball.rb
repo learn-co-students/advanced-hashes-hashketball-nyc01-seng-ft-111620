@@ -274,7 +274,7 @@ def team_colors(basketball_team)
     end
   end
 end
-# ALTERNATIVE, MORE ELEGANT SOLUTION
+# ALTERNATIVE, MORE ELEGANT SOLUTION TO THIS METHOD
 # def team_colors(team_name)
 #   game_hash.each do |team, team_data|
 #     return game_hash[team][:colors] if game_hash[team][:team_name] == team_name
@@ -349,8 +349,6 @@ end
 
 
 def big_shoe_rebounds
-  home_score = 96
-  away_score = 85
   big_shoe_guy = nil
   game_hash.each do |team, attributes|
     attributes.each do |team_stats, nested_data|
@@ -429,7 +427,6 @@ def long_name_steals_a_ton
       end
     end
   end
-  #return long_name
   best_stealer = nil
   game_hash.each do |team, attributes|
     attributes.each do |team_stats, nested_data|
@@ -444,18 +441,3 @@ def long_name_steals_a_ton
   end
   return long_name[:steals] == best_stealer[:steals]
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
