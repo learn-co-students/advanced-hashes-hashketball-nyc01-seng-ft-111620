@@ -127,3 +127,69 @@ def game_hash
 end
 
 # Write code here
+require 'pry'
+def num_points_scored (players_name)
+  home_players_array = game_hash[:home][:players]
+  away_players_array = game_hash[:away][:players]
+  combined_array = home_players_array.concat(away_players_array)
+  player_match = combined_array.find do |player_hash|
+      players_name == player_hash[:player_name]
+  end
+  player_match[:points]
+end
+
+def shoe_size (players_name)
+  home_players_array = game_hash[:home][:players]
+  away_players_array = game_hash[:away][:players]
+  combined_array = home_players_array.concat(away_players_array)
+  player_match = combined_array.find do |player_hash|
+      players_name == player_hash[:player_name]
+  end
+  player_match[:shoe]
+end
+
+def team_colors (team_name)
+  if game_hash[:home][:team_name] == team_name
+    game_hash[:home][:colors]
+  else
+    game_hash[:away][:colors]
+  end
+end
+
+def team_names
+  home_team = game_hash[:home][:team_name]
+  away_team = game_hash[:away][:team_name]
+  team_array = [home_team, away_team]
+  team_array
+end
+
+def player_numbers (team_name)
+  if team_name == game_hash[:home][:team_name]
+    players_array = game_hash[:home][:players]
+  elsif team_name == game_hash[:away][:team_name]
+    players_array = game_hash[:away][:players]
+  end
+    players_array.map do |player_hash|
+      player_hash[:number]
+  end
+end
+
+
+def player_stats (players_name)
+  home_players_array = game_hash[:home][:players]
+  away_players_array = game_hash[:away][:players]
+  combined_array = home_players_array.concat(away_players_array)
+  combined_array.find do |player_hash|
+      players_name == player_hash[:player_name]
+  end
+end
+
+def big_shoe_rebounds
+  home_players_array = game_hash[:home][:players]
+  away_players_array = game_hash[:away][:players]
+  combined_array = home_players_array.concat(away_players_array)
+  largest_shoe_player_hash = combined_array.max_by do |player_hash|
+      player_hash[:shoe]
+  end
+  largest_shoe_player_hash[:rebounds]
+end
