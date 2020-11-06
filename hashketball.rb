@@ -544,6 +544,64 @@ def player_stats(player_name)
 end
 
 
+def most_points_scored
+  #biggest_scorer = nil
+  #player_store = nil
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |data_item|
+          if biggest_scorer == nil || data_item[:points] > biggest_scorer
+            
+            biggest_scorer = data_item[:points]
+            binding.pry
+            player_store = data_item
+            
+          end
+          
+        end
+      end
+    end
+  end
+  #player_store[:player_name]
+end
+
+
+
+
+def winning_team
+  home_score = 0
+  away_score = 0
+  
+  game_hash.each do |location, team_data|
+    if location == :home
+      team_data.each do |attribute, data|
+        if attribute == :players
+          data.each do |data_item|
+            home_score += data_item[:points]
+          end
+        end
+      end
+    elsif location == :away
+      team_data.each do |attribute, data|
+          if attribute == :players
+            data.each do |data_item|
+              away_score += data_item[:points]
+            end
+          end
+        end
+      end
+    end
+    if home_score > away_score
+      puts "The Nets Win!"
+    else
+      puts "The Hornets Win!"
+    end
+end
+
+
+
+
 
 def big_shoe_rebounds
   biggest_shoe = nil
@@ -562,5 +620,37 @@ def big_shoe_rebounds
   end
   player_store[:rebounds]
 end
+
+
+
+
+def player_with_longest_name
+  longest_name = nil
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |data_item|
+          if longest_name == nil || data_item[:player_name].length > longest_name[:player_name].length
+            longest_name = data_item
+          end
+        end
+      end
+    end
+  end
+  longest_name[:player_name]
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
