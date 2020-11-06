@@ -642,10 +642,33 @@ end
 
 
 
-
-
-
-
+def long_name_steals_a_ton?
+  longest_name = nil
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |data_item|
+          if longest_name == nil || data_item[:player_name].length > longest_name[:player_name].length
+            longest_name = data_item
+          end
+        end
+      end
+    end
+  end
+  best_stealer = nil
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |data_item|
+          if best_stealer == nil || data_item[:steals] > best_stealer[:steals]
+            best_stealer = data_item
+          end
+        end
+      end
+    end
+  end
+  best_stealer == longest_name
+end
 
 
 
