@@ -1,3 +1,4 @@
+require "pry"
 # Write your code below game_hash
 def game_hash
   {
@@ -127,3 +128,97 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored(player)
+  game_hash.each do |h_a, team_data|
+    team_data[:players].each do |team_mem|
+      if team_mem[:player_name] == player
+      return team_mem[:points]
+      end
+    end
+  end
+end
+
+#bad code
+#if h_a[team_data] == [:players]
+#team_data.each do |team_info, team_info_data|
+#team_info_data.each do |team_mem_info|
+#if team_mem_info[:player_name] == player
+#team_mem_info[:points].to_i
+  
+def shoe_size(player)
+  game_hash.each do |h_a, team_data|
+    team_data[:players].each do |team_mem|
+      if team_mem[:player_name] == player
+      return team_mem[:shoe]
+      end
+    end
+  end
+end
+
+def team_colors(team_name)
+  game_hash.each do |h_a, team_data|
+    if team_data[:team_name] == team_name
+      return team_data[:colors]
+    end
+  end
+end
+
+def team_names
+  new_arr = []
+  game_hash.each do |h_a, team_data|
+    new_arr << team_data[:team_name]
+  end
+  new_arr
+end
+
+def player_numbers(team_name)
+  new_arr = []
+  game_hash.each do |h_a, team_data|
+    if team_data[:team_name] == team_name
+      team_data[:players].each do |team_mem|
+      new_arr << team_mem[:number]
+      end
+    end
+  end
+  new_arr
+end
+
+def player_stats(player)
+  game_hash.each do |h_a, team_data|
+    team_data[:players].each do |team_mem|
+      if team_mem[:player_name] == player
+        return team_mem
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+  max_size = 0
+  game_hash.each do |h_a, team_data|
+    team_data[:players].each do |team_mem|
+      if max_size < team_mem[:shoe]
+        max_size = team_mem[:shoe]
+      end
+    end
+  end
+  game_hash.each do |h_a, team_data|
+    team_data[:players].each do |team_mem|
+      if team_mem[:shoe] == max_size
+        return team_mem[:rebounds]
+      end
+    end
+  end
+end
+
+
+
+
+
+
+
+
+
+
+
+
